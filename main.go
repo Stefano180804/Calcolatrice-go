@@ -5,6 +5,13 @@ import (
     "math"
 )
 
+const (
+    ColoreReset  = "\033[0m"
+    ColoreRosso  = "\033[31m"
+    ColoreVerde  = "\033[32m"
+    ColoreBlu    = "\033[34m"
+)
+
 func somma(a, b float64) float64 { 
 	return a + b 
 }
@@ -38,27 +45,27 @@ func radice(valore float64) (float64, error) {
 func leggiNumero(prompt string) float64 {
     var n float64
     for {
-        fmt.Print(prompt)
+        fmt.Print(ColoreBlu + prompt + ColoreReset)
         _, err := fmt.Scanln(&n)
         if err == nil {
             return n
         }
-        fmt.Println("Input non valido. Riprova.")
+        fmt.Println(ColoreRosso + "Input non valido. Riprova." + ColoreReset)
     }
 }
 
 func menu() string {
     var scelta string
-    fmt.Println("\n=== CALCOLATRICE ===")
-    fmt.Println("Operazioni disponibili:")
-    fmt.Println(" +    : somma")
-    fmt.Println(" -    : sottrazione")
-    fmt.Println(" *    : moltiplicazione")
-    fmt.Println(" /    : divisione")
-    fmt.Println(" pow  : potenza")
-    fmt.Println(" sqrt : radice quadrata")
-    fmt.Println(" exit : uscita dal programma")
-    fmt.Print("Scegli un'operazione: ")
+    fmt.Println(ColoreBlu + "\n=== CALCOLATRICE ===" + ColoreReset)
+    fmt.Println(ColoreBlu + "Operazioni disponibili:" + ColoreReset)
+    fmt.Println(ColoreBlu + " +    : somma" + ColoreReset)
+    fmt.Println(ColoreBlu + " -    : sottrazione" + ColoreReset)
+    fmt.Println(ColoreBlu + " *    : moltiplicazione" + ColoreReset)
+    fmt.Println(ColoreBlu + " /    : divisione" + ColoreReset)
+    fmt.Println(ColoreBlu + " pow  : potenza" + ColoreReset)
+    fmt.Println(ColoreBlu + " sqrt : radice quadrata" + ColoreReset)
+    fmt.Println(ColoreBlu + " exit : uscita dal programma" + ColoreReset)
+    fmt.Print(ColoreBlu + "Scegli un'operazione: " + ColoreReset)
     fmt.Scanln(&scelta)
     return scelta
 }
@@ -68,7 +75,7 @@ func main() {
         operazione := menu()
 
         if operazione == "exit" {
-            fmt.Println("Uscita dal programma...")
+            fmt.Println(ColoreBlu + "Uscita dal programma..." + ColoreReset)
             break
         }
 
@@ -83,7 +90,7 @@ func main() {
         case "sqrt":
             a = leggiNumero("Inserisci il numero: ")
         default:
-            fmt.Println("Operazione non valida. Riprova.")
+            fmt.Println(ColoreRosso + "Operazione non valida. Riprova." + ColoreReset)
             continue
         }
 
@@ -93,32 +100,32 @@ func main() {
         switch operazione {
         case "+":
             risultato = somma(a, b)
-            fmt.Printf("\n%.2f + %.2f = %.2f\n", a, b, risultato)
+            fmt.Printf(ColoreVerde+"\n%.2f + %.2f = %.2f\n"+ColoreReset, a, b, risultato)
         case "-":
             risultato = sottrai(a, b)
-            fmt.Printf("\n%.2f - %.2f = %.2f\n", a, b, risultato)
+            fmt.Printf(ColoreVerde+"\n%.2f - %.2f = %.2f\n"+ColoreReset, a, b, risultato)
         case "*":
             risultato = moltiplica(a, b)
-            fmt.Printf("\n%.2f * %.2f = %.2f\n", a, b, risultato)
+            fmt.Printf(ColoreVerde+"\n%.2f * %.2f = %.2f\n"+ColoreReset, a, b, risultato)
         case "/":
             risultato, err = dividi(a, b)
             if err == nil {
-                fmt.Printf("\n%.2f / %.2f = %.2f\n", a, b, risultato)
+                fmt.Printf(ColoreVerde+"\n%.2f / %.2f = %.2f\n"+ColoreReset, a, b, risultato)
             }
         case "pow":
             risultato = potenza(a, b)
-            fmt.Printf("\n%.2f ^ %.2f = %.2f\n", a, b, risultato)
+            fmt.Printf(ColoreVerde+"\n%.2f ^ %.2f = %.2f\n"+ColoreReset, a, b, risultato)
         case "sqrt":
             risultato, err = radice(a)
             if err == nil {
-                fmt.Printf("\n√%.2f = %.2f\n", a, risultato)
+                fmt.Printf(ColoreVerde+"\n√%.2f = %.2f\n"+ColoreReset, a, risultato)
             }
         }
 
         if err != nil {
-            fmt.Println("Errore:", err)
+            fmt.Println(ColoreRosso + "Errore: " + err.Error() + ColoreReset)
         }
 
-        fmt.Println("------------------------------")
+        fmt.Println(ColoreBlu + "------------------------------" + ColoreReset)
     }
 }
