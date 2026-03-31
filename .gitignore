@@ -1,0 +1,37 @@
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Testing/tracing output
+*.test
+*.out
+
+# Go dependency directories
+/vendor/
+
+# Node modules, if any (common in mixed repos)
+node_modules/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Go module download cache (optional)
+Gopkg.lock
+
+# Go build cache
+**/bin/
+
+# Generated files
+*.log
